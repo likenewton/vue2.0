@@ -6,26 +6,42 @@
       <div class="tab-item"><router-link to="/ratings">评论</router-link></div>
       <div class="tab-item"><router-link to="/seller">商家</router-link></div>
     </div>
-    <router-view :goods="goods" :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script type="es6">
+  import {urlParse} from './common/js/urlParse';
+
   const ERR_OK = 0;
   import header from './components/header/header.vue'
   export default {
     data() {
       return {
-        seller: {},
-        goods: [],
-        ratings: [],
+        seller: {
+          // 每一个用户都有一个自己的id
+          id: (() => {
+            let queryParam = urlParse();
+            return queryParam.id
+          })()
+        },
       }
     },
     created() {
-      this.$http.get('/api/seller').then((responce) => {
+//      this.$root.eventHub.$on('food', (food) => {
+//        console.log(11);
+//        this.$nextTick(() => {
+//          console.log(food);
+//          this.selectedFoods = food;
+//        })
+//      })
+      this.$http.get('/api/seller?id=' + this.seller.id).then((responce) => {
         responce = responce.body;
         if(responce.errno == ERR_OK) {
-          this.seller = responce.data;
+          // 将response.data与this.seller合并
+          this.seller = Object.assign({}, responce.data, this.seller);
         }
       });
     },
