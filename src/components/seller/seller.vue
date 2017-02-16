@@ -65,7 +65,7 @@
         </ul>
       </div>
     </div>
-    <shopcart :selected-foods="selectedFood" :delivery-price="seller.deliveryPrice"
+    <shopcart :selected-foods="selectedFoods" :delivery-price="seller.deliveryPrice"
               :min-price="seller.minPrice" ref="shop-cart">
     </shopcart>
 
@@ -84,7 +84,7 @@
       seller: {
         type: Object
       },
-      selectedFood: {
+      selectedFoods: {
         type: Array
       }
     },

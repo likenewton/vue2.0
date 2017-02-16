@@ -7,7 +7,7 @@
       <div class="tab-item"><router-link to="/seller">商家</router-link></div>
     </div>
     <keep-alive>
-      <router-view :seller="seller"></router-view>
+      <router-view :seller="seller" :selected-foods="selectedFoods"></router-view>
     </keep-alive>
   </div>
 </template>
@@ -27,6 +27,7 @@
             return queryParam.id
           })()
         },
+        selectedFoods: []
       }
     },
     created() {
@@ -37,6 +38,10 @@
           this.seller = Object.assign({}, responce.data, this.seller);
         }
       });
+      // 从goods组件中接受参数（选择的所有商品）
+      this.$root.eventHub.$on('foods', (foods) => {
+        this.selectedFoods = foods;
+      })
     },
     components: {
       vHeader: header

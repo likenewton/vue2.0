@@ -89,6 +89,7 @@
             }
           })
         })
+        this.$root.eventHub.$emit('foods', foods);
         return foods;
       },
     },
@@ -160,6 +161,7 @@
         this.$refs['shop-cart'].drop(target);
       }
     },
+
     components: {
       food,
       addCar,
