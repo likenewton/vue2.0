@@ -30,13 +30,6 @@
       }
     },
     created() {
-//      this.$root.eventHub.$on('food', (food) => {
-//        console.log(11);
-//        this.$nextTick(() => {
-//          console.log(food);
-//          this.selectedFoods = food;
-//        })
-//      })
       this.$http.get('/api/seller?id=' + this.seller.id).then((responce) => {
         responce = responce.body;
         if(responce.errno == ERR_OK) {

@@ -5,7 +5,7 @@
 export function urlParse() {
   let queryStr = location.search;
   let reg = /[?&][^?&]+=[^?&]+/g;
-  let arr = queryStr.match(reg);
+  let arr = queryStr.match(reg) || [];
   let queryArr = [];
   arr.forEach(function (v) {
     let templateArr = v.slice(1).split('=');

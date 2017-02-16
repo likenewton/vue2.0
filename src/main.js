@@ -19,6 +19,7 @@ const routes = [
   { path: '/ratings', component: Ratings },
   { path: '/seller', component: Seller },
   { path: '/', redirect: '/goods' },
+  { path: '*', redirect: '/goods' },
 ];
 // 创建一个路由实例
 const router = new VueRouter({
